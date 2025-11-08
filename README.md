@@ -36,16 +36,16 @@ ALIF - Cyber Security Researcher & Developer
 🌐 Connect With Me:
 
 <p align="center">
-  <a href="https://www.youtube.com/@hackers_colony_tech" target="_blank">
+  <a href="https://youtube.com/@easyxack?si=GPBgGZ9p1XOoAX0L" target="_blank">
     <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
   </a>
-  <a href="https://t.me/HCO_Official" target="_blank">
+  <a href="https://t.me/samrtearninh" target="_blank">
     <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
   </a>
-  <a href="https://github.com/AzharHCO" target="_blank">
+  <a href="asif-6767" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
-  <a href="https://instagram.com/azhar_hco" target="_blank">
+  <a href="https://www.instagram.com/2mdasifislam?igsh=MWZ3eGc2eGxjYXJkMg==" target="_blank">
     <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
   </a>
 </p>
@@ -117,24 +117,24 @@ termux-setup-storage
 Method 1: Clone Repository
 
 ```bash
-git clone https://github.com/Hackerscolonyofficial/HCO-Fake-Tracker.git
-cd HCO-Fake-Tracker
+git clone https://github.com/asif-6767/MAH-FAKE-TRACKER.git
+cd MAH-FAKE-TRACKER
 python3 HCO-Fake-Tracker.py
 ```
 
 Method 2: Direct Download
 
 ```bash
-curl -O https://github.com/Hackerscolonyofficial/HCO-Fake-Tracker.git
-python3 HCO-Fake-Tracker.py
+curl -O https://github.com/asif-6767/MAH-FAKE-TRACKER.git
+python3 MAH-FAKE-TRACKER.py
 ```
 
 Method 3: Manual Creation
 
 ```bash
-nano hco_tracker.py
+nano mah_tracker.py
 # Copy the code below and save (Ctrl+X, Y, Enter)
-python3 hco_tracker.py
+python3 mah_tracker.py
 ```
 
 ---
@@ -144,7 +144,7 @@ python3 hco_tracker.py
 Step 1: Run the Tool
 
 ```bash
-python3 HCO-Fake-Tracker.py
+python3 MAH-FAKE-TRACKER.py
 ```
 
 Step 2: Unlock Tool
@@ -202,8 +202,8 @@ Common Issues & Solutions
 1. Tool not running:
 
 ```bash
-chmod +x HCO-Fake-Tracker.py
-python3 HCO-Fake-Tracker.py
+chmod +x MAH-FAKE-TRACKER.py
+python3 MAH-FAKE-TRACKER.py
 ```
 
 2. Missing dependencies:
@@ -229,7 +229,7 @@ termux-storage-get /sdcard
 
 ```bash
 pkill -f python
-python3 HCO-Fake-Tracker.py
+python3 MAH-FAKE-TRACKER.py
 ```
 
 ---
