@@ -1,7 +1,7 @@
 🎯 MAH Fake Tracker 🔥
 
 <p align="center">
-  <img src="https://i.postimg.cc/GtNPcfkz/Screenshot-20251105-201106-2.jpg" alt="আলিফের ব্যক্তিগত ছবি">
+  <img src="https://ibb.co.com/JWK24KX4" alt="আলিফের ব্যক্তিগত ছবি">
 </p>
 
 <p align="center">
