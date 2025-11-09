@@ -98,13 +98,7 @@ pip install --upgrade pip
 pip install flask qrcode pillow colorama requests
 ```
 
-4. Install Tunnel Services
-
-```bash
-pkg install cloudflared ngrok openssh -y
-```
-
-5. Setup Storage Permission
+4. Setup Storage Permission
 
 ```bash
 termux-setup-storage
@@ -119,7 +113,7 @@ Method 1: Clone Repository
 ```bash
 git clone https://github.com/asif-6767/MAH-FAKE-TRACKER.git
 cd MAH-FAKE-TRACKER
-python3 HCO-Fake-Tracker.py
+python3 MAH-FAKE-TRACKER.py
 ```
 
 Method 2: Direct Download
@@ -285,7 +279,7 @@ python3 MAH-FAKE-TRACKER.py
 
 ```bash
 # Start tool
-python3 HCO-Fake-Tracker.py
+python3 MAH-FAKE-TRACKER.py
 
 # Update tool
 git pull origin main
@@ -330,9 +324,9 @@ Extend the JavaScript collectedData object.
 
 Join Our Community:
 
-· YouTube: Hackers Colony Tech
-· Telegram: HCO Official
-· GitHub: AzharHCO
+· YouTube: DAYLI X'ACK
+· Telegram: 
+· GitHub: 
 
 Report Issues:
 
